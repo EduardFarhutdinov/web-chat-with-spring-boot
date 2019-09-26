@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div>This is home Page in my application!</div>
+
+        <div>
+            <form method="post">
+                <input type="text" name="messageText" placeholder="Введите сообщение"/>
+                <input type="text" name="tag" placeholder="Тэг"/>
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+
+
+        <div>Список сообщений</div>
+            <form method="post" action="find">
+                <input type="text" name="tag">
+                <button type="submit">Найти</button>
+            </form>
+
+
+        {{#allMessages}}
+            <div>
+                <b>{{id}}</b>
+                <b>{{text}}</b>
+                <i>{{tag}}</i>
+            </div>
+        {{/allMessages}}
+</body>
+</html>
