@@ -5,6 +5,14 @@
 <div>This is home Page in my application!</div>
 
         <div>
+            <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+
+
+        <div>
             <form method="post">
                 <input type="text" name="messageText" placeholder="Введите сообщение"/>
                 <input type="text" name="tag" placeholder="Тэг"/>

@@ -1,10 +1,9 @@
-package com.farhutdinov.project.webappboot;
+package com.farhutdinov.project.webappboot.controller;
 
 import com.farhutdinov.project.webappboot.domain.Message;
 import com.farhutdinov.project.webappboot.repositories.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,25 +11,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Controller
-public class GreetingController {
+public class MainController {
 
     @Autowired
     private MessageRepo messageRepo;
 
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Map<String,Object> model) {
-        model.put("name", name);
+    @GetMapping("/")
+    public String greeting() {
         return "greeting";
     }
 
-    @GetMapping("/")
+    @GetMapping("/main")
     public String homePage(Map<String,Object> model){
         Iterable<Message> allMessages = messageRepo.findAll();
         model.put("allMessages",allMessages);
-        return "home";
+        return "main";
     }
 
-    @PostMapping("/")
+    @PostMapping("/main")
     public String addMessage(@RequestParam String messageText,@RequestParam String tag,
                              Map<String,Object> model){
         if(!messageText.equals("") && !tag.equals("")) {
@@ -42,7 +40,7 @@ public class GreetingController {
         Iterable<Message> messages = messageRepo.findAll();
         model.put("allMessages",messages);
 
-        return "home";
+        return "main";
     }
     @PostMapping("find")
     public String findMessageByTag(@RequestParam String tag,
@@ -54,6 +52,6 @@ public class GreetingController {
             messages = messageRepo.findAll();
         }
         model.put("allMessages",messages);
-        return "home";
+        return "main";
     }
 }
